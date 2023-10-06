@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarklet Page</title>
+    <script>
+        const AMAZON_URL_CLEANER = `javascript:(function(){function e(e,t="white"){let n=document.createElement("div");n.style.position="fixed",n.style.top="5%",n.style.left="50%",n.style.transform="translateX(-50%)",n.style.padding="10px 20px",n.style.backgroundColor="rgba(0, 0, 0, 0.7)",n.style.color=t,n.style.zIndex="9999",n.style.borderRadius="5px",n.style.textAlign="center",n.style.opacity="1",n.style.transition="opacity 0.5s",n.innerText=e,document.body.appendChild(n),setTimeout(()=>{n.style.opacity="0",setTimeout(()=>{n.remove()},500)},1500)}window.location.host.includes("amazon.co.jp")?(t=window.location.href.match(/\/dp\/([A-Z0-9]{10})/),t||(t=window.location.href.match(/\/([A-Z0-9]{10})\/ref=/)),t&&t[1]&&(n="https://www.amazon.co.jp/dp/"+t[1],navigator.clipboard&&navigator.clipboard.writeText(n).then(()=>{e("URLをクリップボードにコピーしました")})),void 0):e("このURLはAmazonではありません","red")})();`;
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll('a[draggable="true"]');  // draggable属性がtrueのすべてのaタグを取得
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+
+                    const bookmarkletName = button.id.toUpperCase();  // IDを大文字に変換
+                    const bookmarkletCode = window[bookmarkletName];  // 変数を動的に参照
+
+                    if (bookmarkletCode) {
+                        button.href = bookmarkletCode;
+                        window.location.href = bookmarkletCode;  // ブックマークレットを実行
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Welcome to My Bookmarklet Page!</h1>
+    <p>以下のボタンをドラッグ＆ドロップして、ブックマークバーに追加してください。</p>
+    <h2>Amazon URL Cleaner</h2>
+    <p>Amazon.co.jp のURLをきれいな形に整形して、クリップボードにコピーします。</p>
+    <a id="amazon_url_cleaner" href="#" draggable="true">Amazon URL Cleaner</a>
+</body>
+
+</html>
