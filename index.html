@@ -1,30 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookmarklet Page</title>
-    <script>
-        const AMAZON_URL_CLEANER = `javascript:(function(){function e(e,t="white"){let n=document.createElement("div");n.style.position="fixed",n.style.top="5%",n.style.left="50%",n.style.transform="translateX(-50%)",n.style.padding="10px 20px",n.style.backgroundColor="rgba(0, 0, 0, 0.7)",n.style.color=t,n.style.zIndex="9999",n.style.borderRadius="5px",n.style.textAlign="center",n.style.opacity="1",n.style.transition="opacity 0.5s",n.innerText=e,document.body.appendChild(n),setTimeout(()=>{n.style.opacity="0",setTimeout(()=>{n.remove()},500)},1500)}window.location.host.includes("amazon.co.jp")?(t=window.location.href.match(/\/dp\/([A-Z0-9]{10})/),t||(t=window.location.href.match(/\/([A-Z0-9]{10})\/ref=/)),t&&t[1]&&(n="https://www.amazon.co.jp/dp/"+t[1],navigator.clipboard&&navigator.clipboard.writeText(n).then(()=>{e("URLをクリップボードにコピーしました")})),void 0):e("このURLはAmazonではありません","red")})();`;
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll('a[draggable="true"]');
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f6f6f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-            buttons.forEach(button => {
-                button.addEventListener('dragstart', function (event) {
-                    const bookmarkletName = button.id.toUpperCase();
-                    const bookmarkletCode = window[bookmarkletName];
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+            font-size: 24px;
+        }
 
-                    if (bookmarkletCode) {
-                        event.dataTransfer.setData('text/plain', bookmarkletCode);
-                        button.href = bookmarkletCode;
-                    }
-                });
-            });
-        });
-    </script>
+        p {
+            padding: 20px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        h2 {
+            border-bottom: 2px solid #333;
+            padding: 10px 20px;
+            font-size: 22px;
+            margin-top: 0;
+        }
+
+        a {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            background-color: #2C3E50;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #34495E;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,7 +61,9 @@
     <p>以下のボタンをドラッグ＆ドロップして、ブックマークバーに追加してください。</p>
     <h2>Amazon URL Cleaner</h2>
     <p>Amazon.co.jp のURLをきれいな形に整形して、クリップボードにコピーします。</p>
-    <a id="amazon_url_cleaner" href="#" draggable="true">Amazon URL Cleaner</a>
+    <a id="amazon_url_cleaner"
+        href='javascript:(function(){function e(e,t="white"){let n=document.createElement("div");n.style.position="fixed",n.style.top="5%",n.style.left="50%",n.style.transform="translateX(-50%)",n.style.padding="10px 20px",n.style.backgroundColor="rgba(0, 0, 0, 0.7)",n.style.color=t,n.style.zIndex="9999",n.style.borderRadius="5px",n.style.textAlign="center",n.style.opacity="1",n.style.transition="opacity 0.5s",n.innerText=e,document.body.appendChild(n),setTimeout(()=>{n.style.opacity="0",setTimeout(()=>{n.remove()},500)},1500)}window.location.host.includes("amazon.co.jp")?(t=window.location.href.match(/\/dp\/([A-Z0-9]{10})/),t||(t=window.location.href.match(/\/([A-Z0-9]{10})\/ref=/)),t&&t[1]&&(n="https://www.amazon.co.jp/dp/"+t[1],navigator.clipboard&&navigator.clipboard.writeText(n).then(()=>{e("URLをクリップボードにコピーしました")})),void 0):e("このURLはAmazonではありません","red")})();'
+        draggable="true">Amazon URL Cleaner</a>
 </body>
 
 </html>
