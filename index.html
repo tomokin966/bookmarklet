@@ -10,18 +10,16 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll('a[draggable="true"]');  // draggable属性がtrueのすべてのaタグを取得
+            const buttons = document.querySelectorAll('a[draggable="true"]');
 
             buttons.forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-
-                    const bookmarkletName = button.id.toUpperCase();  // IDを大文字に変換
-                    const bookmarkletCode = window[bookmarkletName];  // 変数を動的に参照
+                button.addEventListener('dragstart', function (event) {
+                    const bookmarkletName = button.id.toUpperCase();
+                    const bookmarkletCode = window[bookmarkletName];
 
                     if (bookmarkletCode) {
+                        event.dataTransfer.setData('text/plain', bookmarkletCode);
                         button.href = bookmarkletCode;
-                        window.location.href = bookmarkletCode;  // ブックマークレットを実行
                     }
                 });
             });
