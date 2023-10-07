@@ -37,6 +37,16 @@
         }
 
         a {
+            color: #2C3E50;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #34495E;
+        }
+
+        a.bookmarklet {
             display: inline-block;
             margin: 20px;
             padding: 10px 30px;
@@ -50,7 +60,7 @@
             transition: background-color 0.3s;
         }
 
-        a:hover {
+        a.bookmarklet:hover {
             background-color: #34495E;
         }
     </style>
@@ -59,11 +69,19 @@
 <body>
     <h1>Welcome to My Bookmarklet Page!</h1>
     <p>以下のボタンをドラッグ＆ドロップして、ブックマークバーに追加してください。</p>
+
     <h2>Amazon URL Cleaner</h2>
     <p>Amazon.co.jp のURLをきれいな形に整形して、クリップボードにコピーします。</p>
-    <a id="amazon_url_cleaner"
+    <a id="amazon_url_cleaner" class="bookmarklet"
         href='javascript:(function(){function e(e,t="white"){let n=document.createElement("div");n.style.position="fixed",n.style.top="5%",n.style.left="50%",n.style.transform="translateX(-50%)",n.style.padding="10px 20px",n.style.backgroundColor="rgba(0, 0, 0, 0.7)",n.style.color=t,n.style.zIndex="9999",n.style.borderRadius="5px",n.style.textAlign="center",n.style.opacity="1",n.style.transition="opacity 0.5s",n.innerText=e,document.body.appendChild(n),setTimeout(()=>{n.style.opacity="0",setTimeout(()=>{n.remove()},500)},1500)}window.location.host.includes("amazon.co.jp")?(t=window.location.href.match(/\/dp\/([A-Z0-9]{10})/),t||(t=window.location.href.match(/\/([A-Z0-9]{10})\/ref=/)),t&&t[1]&&(n="https://www.amazon.co.jp/dp/"+t[1],navigator.clipboard&&navigator.clipboard.writeText(n).then(()=>{e("URLをクリップボードにコピーしました")})),void 0):e("このURLはAmazonではありません","red")})();'
         draggable="true">Amazon URL Cleaner</a>
+
+    <h2>MHW スキルシミュ(泣) MOD</h2>
+    <p><a href="https://mhw.wiki-db.com/sim/">MHW スキルシミュ(泣)</a> のスキル名で検索するフォームを追加するMOD。</p>
+    <p>スキル名を検索して検索結果をクリックすることで、該当スキルのプルダウンメニューにフォーカスが当たり、カーソルキーで簡単にレベルを選択できます。</p>
+    <a id="amazon_url_cleaner" class="bookmarklet"
+        href='javascript:(function(){function e(e){return e.replace(/[\u30a1-\u30f6]/g,function(e){let t=e.charCodeAt(0)-96;return String.fromCharCode(t)})}function t(e){return e.replace(/[\u3041-\u3096]/g,function(e){let t=e.charCodeAt(0)+96;return String.fromCharCode(t)})}if("mhw.wiki-db.com"!==window.location.host)return;let n=document.createElement("button");n.textContent="結果を表示する",n.style.position="fixed",n.style.right="10px",n.style.top="10px",n.style.zIndex=9999;let o=document.createElement("input");o.type="text",o.placeholder="スキル名を入力",o.style.position="fixed",o.style.right="10px",o.style.top="40px",o.style.zIndex=9999;let l=document.createElement("div");l.style.position="fixed",l.style.right="10px",l.style.top="70px",l.style.zIndex=9999,l.style.backgroundColor="#FFF",l.style.border="1px solid #CCC",l.style.maxHeight=window.innerHeight-40+"px",l.style.overflowY="scroll",l.style.padding="5px",l.style.display="none",n.onclick=function(){"none"===l.style.display?(l.style.display="block",n.textContent="結果を隠す"):(l.style.display="none",n.textContent="結果を表示する")},document.body.appendChild(n),document.body.appendChild(o),document.body.appendChild(l),o.addEventListener("input",function(){let i=o.value;l.innerHTML="";let d=[];if(i){l.style.display="block",n.textContent="結果を隠す";let o=e(i),r=t(i),s=document.querySelectorAll("select option");for(let e of s){let t=e.textContent.replace(/Lv\d(?!\d)/,"");if((t.includes(o)||t.includes(r))&&!d.includes(t)){d.push(t);let n=document.createElement("div");n.textContent=t,n.style.cursor="pointer",n.style.padding="2px",n.style.borderBottom="1px solid #EEE",n.onmouseover=function(){n.style.backgroundColor="#FFDDDD"},n.onmouseout=function(){n.style.backgroundColor=""},n.onclick=function(){e.parentNode.focus(),e.parentNode.scrollIntoView()},l.appendChild(n)}}}else l.style.display="none",n.textContent="結果を表示する"})})();'
+        draggable="true">MHW Skill Sim MOD</a>
 </body>
 
 </html>
